@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -8,6 +8,9 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
+import Home from '../routes/Home'
+import CityCreate from '../routes/CityCreate'
+import Cities from '../routes/CitiesList'
 
 class App extends Component {
   constructor () {
@@ -54,10 +57,13 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/create-city' component={CityCreate} />
+          <Route exact path='/cities' component={Cities} />
         </main>
       </Fragment>
     )
   }
 }
 
-export default App
+export default withRouter(App)
