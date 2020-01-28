@@ -6,7 +6,7 @@ const CityForm = ({ city, handleSubmit, handleChange, cancelPath }) => (
     <label>City Name</label>
     <input
       placeholder="Boston"
-      // value={city.city_name}
+      value={city.city_name}
       name="city_name"
       onChange={handleChange}
       type='text'
@@ -15,7 +15,7 @@ const CityForm = ({ city, handleSubmit, handleChange, cancelPath }) => (
     <label>City Zipcode</label>
     <input
       placeholder="02130"
-      // value={city.city_zip}
+      value={city.city_zip}
       name="city_zip"
       onChange={handleChange}
       type='text'

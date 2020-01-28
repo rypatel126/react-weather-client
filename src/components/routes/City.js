@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Layout from '../shared/Layout'
 
 import apiUrl from '../../apiConfig'
 
@@ -11,14 +12,14 @@ class City extends Component {
     this.state = {
       city: null
     }
-    console.log('city props are:', this.props)
-    console.log('test 1')
+    // console.log('city props are:', this.props)
+    // console.log('test 1')
   }
 
   componentDidMount () {
-    console.log('test 2')
-    console.log('City componentDidMount')
-    console.log('City Props are:' + this.props)
+    // console.log('test 2')
+    // console.log('City componentDidMount')
+    // console.log('City Props are:' + this.props)
     axios({
       url: `${apiUrl}/cities/${this.props.match.params.id}`,
       method: 'GET',
@@ -28,12 +29,13 @@ class City extends Component {
     })
       .then(res => {
         this.setState({ city: res.data.city })
+        console.log('in CityEdit user info is', this.props.user)
       })
       .catch(console.error)
   }
 
   handleDelete = () => {
-    console.log('test 3')
+    // console.log('test 3')
     axios({
       url: `${apiUrl}/cities/${this.props.match.params.id}`,
       method: 'DELETE',
@@ -47,19 +49,21 @@ class City extends Component {
   }
 
   render () {
-    console.log('test 4')
+    // console.log('test 4')
     if (!this.state.city) {
-      console.log('No city to show')
+      // console.log('No city to show')
       return <p>Loading...</p>
     }
 
     return (
-      <div>
-        {/* {this.state.book ? this.state.book.title : 'No book found'} */}
-        <h2>{this.state.city.city_name}</h2>
-        <Link className="btn btn-primary" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
-        <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
-      </div>
+      <Layout>
+        <div>
+          {/* {this.state.book ? this.state.book.title : 'No book found'} */}
+          <h2>{this.state.city.city_name}</h2>
+          <Link className="btn btn-primary" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
+          <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
+        </div>
+      </Layout>
     )
   }
 }

@@ -69,7 +69,7 @@ class App extends Component {
           <Route exact path='/cities/:id' render={(props) => (
             <City user={user} match={props.match} history={props.history} />
           )} />
-          <AuthenticatedRoute user={user} exact path='/books/:id/edit' render={({ match }) => (
+          <AuthenticatedRoute user={user} exact path='/cities/:id/edit' render={({ match }) => (
             <CityEdit match={match} alert={this.alert} user={user} />
           )} />
         </main>

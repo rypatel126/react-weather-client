@@ -5,6 +5,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
 import { Redirect } from 'react-router-dom'
+import Layout from '../shared/Layout'
 
 class CityEdit extends Component {
   constructor (props) {
@@ -20,9 +21,13 @@ class CityEdit extends Component {
   }
 
   componentDidMount () {
+    console.log('CityEdit componentDidMount')
     axios({
       url: `${apiUrl}/cities/${this.props.match.params.id}`,
-      method: 'GET'
+      method: 'GET',
+      headers: {
+        'Authorization': `Token token=${this.props.user.token}`
+      }
     })
       .then(res => {
         this.setState({ city: res.data.city })
@@ -65,12 +70,14 @@ class CityEdit extends Component {
     }
 
     return (
-      <CityForm
-        book={this.state.city}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        cancelPath="/"
-      />
+      <Layout>
+        <CityForm
+          city={this.state.city}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          cancelPath="/"
+        />
+      </Layout>
     )
   }
 }
