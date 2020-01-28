@@ -11,6 +11,8 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import Home from '../routes/Home'
 import CityCreate from '../routes/CityCreate'
 import Cities from '../routes/CitiesList'
+import City from '../routes/City'
+import CityEdit from '../routes/CityEdit'
 
 class App extends Component {
   constructor () {
@@ -63,6 +65,12 @@ class App extends Component {
           )} />
           <Route exact path='/cities' render={() => (
             <Cities alert={this.alert} user={user} />
+          )} />
+          <Route exact path='/cities/:id' render={(props) => (
+            <City user={user} match={props.match} history={props.history} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/books/:id/edit' render={({ match }) => (
+            <CityEdit match={match} alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>

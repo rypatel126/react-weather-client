@@ -43,7 +43,7 @@ class CityCreate extends Component {
         }
       }
     })
-      .then(res => this.setState({ createdId: res.data.city._id }))
+      .then(res => this.setState({ createdId: res.data.city.id }))
       .then(res => console.log(res.data))
       .then(() => this.props.alert({ heading: 'Woot Woot', message: 'You added a city', variant: 'success' }))
       .catch(() => this.props.alert({ heading: 'Something went wrong', message: 'Try again!', variant: 'danger' }))

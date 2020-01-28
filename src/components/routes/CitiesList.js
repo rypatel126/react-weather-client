@@ -35,21 +35,21 @@ class Cities extends Component {
   }
 
   render () {
-    console.log('render started')
+    // console.log('render started')
     let citiesJsx = ''
 
     if (!this.state.cities.length) {
       citiesJsx = <p>Loading...</p>
-      console.log('no cities to display')
+      // console.log('no cities to display')
     } else {
-      console.log('cities are being shown')
+      // console.log('cities are being shown')
       citiesJsx = this.state.cities.map(city => (
         <li key={city.id}>
           <Link to={`/cities/${city.id}`}>{city.city_name}</Link>
         </li>
       )
       )
-      console.log('state is', this.state)
+      // console.log('state is', this.state)
     }
 
     return (
