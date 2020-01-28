@@ -58,8 +58,12 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
-          <Route exact path='/create-city' component={CityCreate} />
-          <Route exact path='/cities' component={Cities} />
+          <AuthenticatedRoute user={user} path='/create-city' render={() => (
+            <CityCreate alert={this.alert} user={user} />
+          )} />
+          <Route exact path='/cities' render={() => (
+            <Cities alert={this.alert} user={user} />
+          )} />
         </main>
       </Fragment>
     )

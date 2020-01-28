@@ -5,7 +5,7 @@ const Nav = () => (
   <nav>
     <Link to="/">Home Page</Link>
     <Link to="/cities">Your Cities</Link>
-    <Link to="/create-cities">Add a City</Link>
+    <Link to="/create-city">Add a City</Link>
   </nav>
 )
 

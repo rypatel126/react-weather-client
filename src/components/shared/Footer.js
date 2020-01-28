@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Footer = () => (
-  <p>Built by SEI 06</p>
+  <p>Built using Ruby on Rails and React</p>
 )
 
 export default Footer
