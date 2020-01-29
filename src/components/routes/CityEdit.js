@@ -21,7 +21,6 @@ class CityEdit extends Component {
   }
 
   componentDidMount () {
-    console.log('CityEdit componentDidMount')
     axios({
       url: `${apiUrl}/cities/${this.props.match.params.id}`,
       method: 'GET',
@@ -60,7 +59,7 @@ class CityEdit extends Component {
       }
     })
       .then(res => this.setState({ updated: true }))
-      .then(() => this.props.alert({ heading: 'Success!', message: 'You updated a book', variant: 'success' }))
+      .then(() => this.props.alert({ heading: 'Success!', message: 'You updated your city', variant: 'success' }))
       .catch(() => this.props.alert({ heading: 'Something went wrong', message: 'Try again!', variant: 'danger' }))
   }
 

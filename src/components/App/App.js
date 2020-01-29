@@ -67,7 +67,7 @@ class App extends Component {
             <Cities alert={this.alert} user={user} />
           )} />
           <Route exact path='/cities/:id' render={(props) => (
-            <City user={user} match={props.match} history={props.history} />
+            <City alert={this.alert} user={user} match={props.match} history={props.history} />
           )} />
           <AuthenticatedRoute user={user} exact path='/cities/:id/edit' render={({ match }) => (
             <CityEdit match={match} alert={this.alert} user={user} />

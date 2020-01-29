@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import messages from '../AutoDismissAlert/messages'
 
 import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
@@ -15,6 +16,7 @@ class Cities extends Component {
   }
 
   componentDidMount () {
+    const { alert } = this.props
     // console.log('componentDidMount')
     // console.log('props info:', this.props)
     // console.log('user info:', this.props.user)
@@ -28,9 +30,21 @@ class Cities extends Component {
     })
       .then((res) => {
         this.setState({ cities: res.data.cities })
+        alert({
+          heading: 'Cities are listed above!',
+          message: messages.success,
+          variant: 'success'
+        })
         // console.log(res.data)
       })
-      .catch(console.error)
+      .catch(error => {
+        console.error(error)
+        alert({
+          heading: 'Failed to load cities',
+          message: messages.failure,
+          variant: 'danger'
+        })
+      })
     // console.log('axios request completed')
   }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Layout from '../shared/Layout'
+import messages from '../AutoDismissAlert/messages'
 
 import apiUrl from '../../apiConfig'
 
@@ -29,12 +30,12 @@ class City extends Component {
     })
       .then(res => {
         this.setState({ city: res.data.city })
-        console.log('in CityEdit user info is', this.props.user)
       })
       .catch(console.error)
   }
 
   handleDelete = () => {
+    const { alert } = this.props
     // console.log('test 3')
     axios({
       url: `${apiUrl}/cities/${this.props.match.params.id}`,
@@ -45,7 +46,19 @@ class City extends Component {
     })
     // sends user back to home after book has been deleted:
       .then(this.props.history.push('/'))
-      .catch(console.error)
+      .then(() => alert({
+        heading: 'You deleted a city',
+        message: messages.success,
+        variant: 'success'
+      }))
+      .catch(error => {
+        console.error(error)
+        alert({
+          heading: 'Error',
+          message: messages.failure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {

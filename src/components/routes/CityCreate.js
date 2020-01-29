@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
+import messages from '../AutoDismissAlert/messages'
 
 import apiUrl from '../../apiConfig'
 import CityForm from '../shared/CityForm'
@@ -28,6 +29,7 @@ class CityCreate extends Component {
   }
 
   handleSubmit = event => {
+    const { alert } = this.props
     event.preventDefault()
 
     axios({
@@ -44,9 +46,20 @@ class CityCreate extends Component {
       }
     })
       .then(res => this.setState({ createdId: res.data.city.id }))
-      .then(res => console.log(res.data))
-      .then(() => this.props.alert({ heading: 'Woot Woot', message: 'You added a city', variant: 'success' }))
-      .catch(() => this.props.alert({ heading: 'Something went wrong', message: 'Try again!', variant: 'danger' }))
+      .then(() => alert({
+        heading: 'You have added a city to your list!',
+        message: messages.success,
+        variant: 'success'
+      }))
+      .catch(error => {
+        console.error(error)
+        // this.setState({ city_name: '', city_zip: '' })
+        alert({
+          heading: 'Could not add that city',
+          message: messages.failure,
+          variant: 'danger'
+        })
+      })
   }
 
   render () {
