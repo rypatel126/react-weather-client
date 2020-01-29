@@ -23,6 +23,7 @@ class City extends Component {
   }
 
   componentDidMount () {
+    let city
     // console.log('city in state is:', this.state.city)
     // console.log('data in state is:', this.state.data)
     // console.log('City componentDidMount')
@@ -34,21 +35,36 @@ class City extends Component {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
+      // .then(res => {
+      //   this.setState({ city: res.data.city })
+      //   console.log('after get request state is:', this.state.city.city_zip)
+      // })
       .then(res => {
-        this.setState({ city: res.data.city })
-        console.log('after get request state is:', this.state.city.city_zip)
+        city = res.data.city
+        return axios({
+          url: `${weatherApi}` + `${city.city_zip},us` + '&units=imperial&APPID=' + `${apiKey}`,
+          method: 'GET'
+        })
+          .then(res => {
+            this.setState({
+              data: res.data,
+              city: city
+            })
+            // console.log('after get request data state is:', this.state.data)
+          })
+          .catch(console.error)
       })
       .catch(console.error)
     // axios GET request to third party weather API
-    axios({
-      url: `${weatherApi}` + `${this.state.city.city_zip},us` + '&APPID=' + `${apiKey}`,
-      method: 'GET'
-    })
-      .then(res => {
-        this.setState({ data: res.data })
-        console.log('after get request data state is:', this.state.data)
-      })
-      .catch(console.error)
+    // axios({
+    //   url: `${weatherApi}` + `${this.state.city.city_zip},us` + '&APPID=' + `${apiKey}`,
+    //   method: 'GET'
+    // })
+    //   .then(res => {
+    //     this.setState({ data: res.data })
+    //     console.log('after get request data state is:', this.state.data)
+    //   })
+    //   .catch(console.error)
   }
 
   handleDelete = () => {
@@ -93,6 +109,9 @@ class City extends Component {
           <h3>Zipcode: {this.state.city.city_zip}</h3>
           <Link className="btn btn-primary" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
           <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
+          <p>Status: {this.state.data.weather[0].main}</p>
+          <p>Description: {this.state.data.weather[0].description}</p>
+          <p>Temperature (Fahrenheit): {this.state.data.main.temp}</p>
         </div>
       </Layout>
     )

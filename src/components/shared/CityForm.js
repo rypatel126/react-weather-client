@@ -10,6 +10,7 @@ const CityForm = ({ city, handleSubmit, handleChange, cancelPath }) => (
       name="city_name"
       onChange={handleChange}
       type='text'
+      required
     />
 
     <label>City Zipcode</label>
@@ -19,6 +20,7 @@ const CityForm = ({ city, handleSubmit, handleChange, cancelPath }) => (
       name="city_zip"
       onChange={handleChange}
       type='text'
+      required
     />
 
     <button type="submit">Submit</button>
