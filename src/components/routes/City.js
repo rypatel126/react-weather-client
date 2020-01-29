@@ -72,7 +72,8 @@ class City extends Component {
       <Layout>
         <div>
           {/* {this.state.book ? this.state.book.title : 'No book found'} */}
-          <h2>{this.state.city.city_name}</h2>
+          <h2>City: {this.state.city.city_name}</h2>
+          <h3>Zipcode: {this.state.city.city_zip}</h3>
           <Link className="btn btn-primary" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
           <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
         </div>
