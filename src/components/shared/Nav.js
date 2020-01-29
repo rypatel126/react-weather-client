@@ -7,6 +7,7 @@ const Nav = () => (
   </nav>
 )
 
+// These have been moved to the header folder so they will only be shown after login
 // <Link to="/cities">Your Cities</Link>
 // <Link to="/create-city">Add a City</Link>
 
