@@ -6,19 +6,25 @@ import messages from '../AutoDismissAlert/messages'
 
 import apiUrl from '../../apiConfig'
 
+const apiKey = 'a6047cbf25b75afc13e72ba457a05846'
+const weatherApi = 'http://api.openweathermap.org/data/2.5/weather?zip='
+
 class City extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      city: null
+      city: null,
+      // data is what will come back from weather api
+      data: null
     }
     // console.log('city props are:', this.props)
     // console.log('test 1')
   }
 
   componentDidMount () {
-    // console.log('test 2')
+    // console.log('city in state is:', this.state.city)
+    // console.log('data in state is:', this.state.data)
     // console.log('City componentDidMount')
     // console.log('City Props are:' + this.props)
     axios({
@@ -30,6 +36,17 @@ class City extends Component {
     })
       .then(res => {
         this.setState({ city: res.data.city })
+        console.log('after get request state is:', this.state.city.city_zip)
+      })
+      .catch(console.error)
+    // axios GET request to third party weather API
+    axios({
+      url: `${weatherApi}` + `${this.state.city.city_zip},us` + '&APPID=' + `${apiKey}`,
+      method: 'GET'
+    })
+      .then(res => {
+        this.setState({ data: res.data })
+        console.log('after get request data state is:', this.state.data)
       })
       .catch(console.error)
   }
