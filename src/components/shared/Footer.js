@@ -1,7 +1,8 @@
 import React from 'react'
+import '../../index.scss'
 
 const Footer = () => (
-  <p>Built using Ruby on Rails and React</p>
+  <p className="footer-message">Built using Ruby on Rails and React</p>
 )
 
 export default Footer

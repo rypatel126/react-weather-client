@@ -13,6 +13,7 @@ import CityCreate from '../routes/CityCreate'
 import Cities from '../routes/CitiesList'
 import City from '../routes/City'
 import CityEdit from '../routes/CityEdit'
+import '../../index.scss'
 
 class App extends Component {
   constructor () {
