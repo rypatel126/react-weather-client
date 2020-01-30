@@ -117,7 +117,6 @@ class City extends Component {
             <ListGroup.Item>Current Status: {this.state.data.weather[0].main}</ListGroup.Item>
             <ListGroup.Item>Description: {this.state.data.weather[0].description}</ListGroup.Item>
             <ListGroup.Item>Temperature (Fahrenheit): {this.state.data.main.temp}</ListGroup.Item>
-            <ListGroup.Item></ListGroup.Item>
           </ListGroup>
         </div>
       </Layout>

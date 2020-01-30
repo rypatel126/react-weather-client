@@ -1,5 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+  background-color: #F3F3F3;
+}
+
 nav {
   padding: 5px 5px 5px 0;
   // margin: 5px;
@@ -21,6 +25,8 @@ nav {
 
 .city-list {
   color: black;
+  margin: 10px 10px 10px 0;
+  padding: 10px 10px 10px 0
 }
 
 a {
