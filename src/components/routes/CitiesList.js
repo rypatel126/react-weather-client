@@ -55,7 +55,7 @@ class Cities extends Component {
     let citiesJsx = ''
 
     if (!this.state.cities.length) {
-      citiesJsx = <p>Loading...</p>
+      citiesJsx = <p>No cities to display, please add a city using the Add City button at the top right of the screen</p>
       // console.log('no cities to display')
     } else {
       // console.log('cities are being shown')
