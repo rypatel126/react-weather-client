@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -8,6 +8,12 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
+import Home from '../routes/Home'
+import CityCreate from '../routes/CityCreate'
+import Cities from '../routes/CitiesList'
+import City from '../routes/City'
+import CityEdit from '../routes/CityEdit'
+import '../../index.scss'
 
 class App extends Component {
   constructor () {
@@ -54,10 +60,23 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
+          <Route exact path='/' component={Home} />
+          <AuthenticatedRoute user={user} path='/create-city' render={() => (
+            <CityCreate alert={this.alert} user={user} />
+          )} />
+          <Route exact path='/cities' render={() => (
+            <Cities alert={this.alert} user={user} />
+          )} />
+          <Route exact path='/cities/:id' render={(props) => (
+            <City alert={this.alert} user={user} match={props.match} history={props.history} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/cities/:id/edit' render={({ match }) => (
+            <CityEdit match={match} alert={this.alert} user={user} />
+          )} />
         </main>
       </Fragment>
     )
   }
 }
 
-export default App
+export default withRouter(App)

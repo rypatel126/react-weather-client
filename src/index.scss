@@ -1,1 +1,42 @@
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #F3F3F3;
+}
+
+nav {
+  padding: 5px 5px 5px 0;
+  // margin: 5px;
+}
+
+.btn {
+  margin: 10px 5px 10px 5px;
+}
+
+.city-name {
+  text-decoration: underline;
+  text-decoration-style: double;
+}
+
+.weather-data {
+  text-decoration: underline;
+  font-size: 25px;
+}
+
+.city-list {
+  color: black;
+  margin: 10px 10px 10px 0;
+  padding: 10px 10px 10px 0
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: grey;
+}
+
+.footer-message {
+  font-size: 10px;
+}
