@@ -9,7 +9,7 @@ import '../../index.scss'
 import apiUrl from '../../apiConfig'
 
 const apiKey = 'a6047cbf25b75afc13e72ba457a05846'
-const weatherApi = 'http://api.openweathermap.org/data/2.5/weather?zip='
+const weatherApi = 'https://api.openweathermap.org/data/2.5/weather?zip='
 
 class City extends Component {
   constructor (props) {
