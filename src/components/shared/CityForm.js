@@ -51,13 +51,14 @@ const CityForm = ({ city, handleSubmit, handleChange, cancelPath }) => (
         name="city_zip"
         onChange={handleChange}
         type='text'
+        maxLength='5'
         required
       />
     </Form.Group>
     <Form.Text className="text-muted">
       Please enter a valid 5 digit zip code (US only)
     </Form.Text>
-    <Button variant="primary" type="submit">
+    <Button variant="dark" type="submit">
       Submit
     </Button>
     <Link to={cancelPath}>

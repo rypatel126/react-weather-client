@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Layout from '../shared/Layout'
 import messages from '../AutoDismissAlert/messages'
+import ListGroup from 'react-bootstrap/ListGroup'
+import '../../index.scss'
 
 import apiUrl from '../../apiConfig'
 
@@ -106,14 +108,17 @@ class City extends Component {
     return (
       <Layout>
         <div>
-          {/* {this.state.book ? this.state.book.title : 'No book found'} */}
-          <h2>City: {this.state.city.city_name}</h2>
-          <h3>Zipcode: {this.state.city.city_zip}</h3>
-          <Link className="btn btn-primary" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
+          <h3 className="city-name">City: {this.state.city.city_name}</h3>
+          <h5>Zipcode: {this.state.city.city_zip}</h5>
+          <Link className="btn btn-dark" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
           <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
-          <p>Status: {this.state.data.weather[0].main}</p>
-          <p>Description: {this.state.data.weather[0].description}</p>
-          <p>Temperature (Fahrenheit): {this.state.data.main.temp}</p>
+          <ListGroup variant="flush" className="city-list">
+            <ListGroup.Item className="weather-data">Weather Data:</ListGroup.Item>
+            <ListGroup.Item>Current Status: {this.state.data.weather[0].main}</ListGroup.Item>
+            <ListGroup.Item>Description: {this.state.data.weather[0].description}</ListGroup.Item>
+            <ListGroup.Item>Temperature (Fahrenheit): {this.state.data.main.temp}</ListGroup.Item>
+            <ListGroup.Item></ListGroup.Item>
+          </ListGroup>
         </div>
       </Layout>
     )

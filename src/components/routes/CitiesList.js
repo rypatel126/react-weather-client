@@ -5,6 +5,8 @@ import messages from '../AutoDismissAlert/messages'
 
 import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
+import ListGroup from 'react-bootstrap/ListGroup'
+import '../../index.scss'
 
 class Cities extends Component {
   constructor (props) {
@@ -32,7 +34,7 @@ class Cities extends Component {
         this.setState({ cities: res.data.cities })
         alert({
           heading: 'Cities are listed above!',
-          message: messages.success,
+          message: 'Click on a city to view some weather data',
           variant: 'success'
         })
         // console.log(res.data)
@@ -58,9 +60,11 @@ class Cities extends Component {
     } else {
       // console.log('cities are being shown')
       citiesJsx = this.state.cities.map(city => (
-        <li key={city.id}>
-          <Link to={`/cities/${city.id}`}>{city.city_name}</Link>
-        </li>
+        <ListGroup key={city.id}>
+          <ListGroup.Item variant="flush">
+            <Link to={`/cities/${city.id}`}>{city.city_name}</Link>
+          </ListGroup.Item>
+        </ListGroup>
       )
       )
       // console.log('state is', this.state)
@@ -68,14 +72,18 @@ class Cities extends Component {
 
     return (
       <Layout>
-        <h4>Cities</h4>
-        <ul>
+        <h4>Your Cities</h4>
+        <div className="city-list">
           {citiesJsx}
-        </ul>
+        </div>
       </Layout>
     )
   }
 }
+
+// <ListGroup>
+//   <ListGroup.Item variant="info">{citiesJsx}</ListGroup.Item>
+// </ListGroup>
 
 // const Cities = props => {
 //   const [cities, setCities] = useState([])
