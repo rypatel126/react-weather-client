@@ -29,8 +29,9 @@ class CityCreate extends Component {
   }
 
   handleSubmit = event => {
-    const { alert } = this.props
     event.preventDefault()
+
+    const { alert } = this.props
 
     axios({
       url: `${apiUrl}/cities/`,

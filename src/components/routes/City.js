@@ -68,6 +68,8 @@ class City extends Component {
   }
 
   handleDelete = () => {
+    event.preventDefault()
+
     const { alert } = this.props
     // console.log('test 3')
     axios({
@@ -98,7 +100,7 @@ class City extends Component {
     // console.log('test 4')
     if (!this.state.city) {
       // console.log('No city to show')
-      return <p>Loading...</p>
+      return <p>Loading...If this message persists for more than a few seconds, please return to Home and try again</p>
     }
 
     return (
