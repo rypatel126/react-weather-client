@@ -5,6 +5,7 @@ import Layout from '../shared/Layout'
 import messages from '../AutoDismissAlert/messages'
 import ListGroup from 'react-bootstrap/ListGroup'
 import '../../index.scss'
+import Spinner from 'react-bootstrap/Spinner'
 
 import apiUrl from '../../apiConfig'
 
@@ -20,16 +21,10 @@ class City extends Component {
       // data is what will come back from weather api
       data: null
     }
-    // console.log('city props are:', this.props)
-    // console.log('test 1')
   }
 
   componentDidMount () {
     let city
-    // console.log('city in state is:', this.state.city)
-    // console.log('data in state is:', this.state.data)
-    // console.log('City componentDidMount')
-    // console.log('City Props are:' + this.props)
     axios({
       url: `${apiUrl}/cities/${this.props.match.params.id}`,
       method: 'GET',
@@ -37,10 +32,6 @@ class City extends Component {
         'Authorization': `Token token=${this.props.user.token}`
       }
     })
-      // .then(res => {
-      //   this.setState({ city: res.data.city })
-      //   console.log('after get request state is:', this.state.city.city_zip)
-      // })
       .then(res => {
         city = res.data.city
         return axios({
@@ -52,7 +43,6 @@ class City extends Component {
               data: res.data,
               city: city
             })
-            // console.log('after get request data state is:', this.state.data)
           })
           .catch(console.error)
       })
@@ -99,28 +89,35 @@ class City extends Component {
   }
 
   render () {
-    // console.log('test 4')
     if (!this.state.city) {
-      // console.log('No city to show')
-      return <p>Loading...If this message persists for more than a few seconds, please return to Home and try again</p>
+      return (
+        <Layout>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Spinner animation="grow" className="loading-spinner"/>
+          </div>
+          <div>
+            <Link className="btn btn-dark" to={`/cities/${this.props.match.params.id}/edit`}>Searching for zip code, if this message persists for more than 5 seconds please double check you are using a valid 5-digit US zip code and click this message to edit the city information</Link>
+          </div>
+        </Layout>
+      )
+    } else {
+      return (
+        <Layout>
+          <div>
+            <h3 className="city-name">City: {this.state.city.city_name}</h3>
+            <h5>Zipcode: {this.state.city.city_zip}</h5>
+            <Link className="btn btn-dark" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
+            <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
+            <ListGroup variant="flush" className="city-list">
+              <ListGroup.Item className="weather-data">Weather Data:</ListGroup.Item>
+              <ListGroup.Item>Current Status: {this.state.data.weather[0].main}</ListGroup.Item>
+              <ListGroup.Item>Description: {this.state.data.weather[0].description}</ListGroup.Item>
+              <ListGroup.Item>Temperature (Fahrenheit): {this.state.data.main.temp}</ListGroup.Item>
+            </ListGroup>
+          </div>
+        </Layout>
+      )
     }
-
-    return (
-      <Layout>
-        <div>
-          <h3 className="city-name">City: {this.state.city.city_name}</h3>
-          <h5>Zipcode: {this.state.city.city_zip}</h5>
-          <Link className="btn btn-dark" to={`/cities/${this.props.match.params.id}/edit`}>Edit</Link>
-          <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
-          <ListGroup variant="flush" className="city-list">
-            <ListGroup.Item className="weather-data">Weather Data:</ListGroup.Item>
-            <ListGroup.Item>Current Status: {this.state.data.weather[0].main}</ListGroup.Item>
-            <ListGroup.Item>Description: {this.state.data.weather[0].description}</ListGroup.Item>
-            <ListGroup.Item>Temperature (Fahrenheit): {this.state.data.main.temp}</ListGroup.Item>
-          </ListGroup>
-        </div>
-      </Layout>
-    )
   }
 }
 

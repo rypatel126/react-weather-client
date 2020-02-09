@@ -19,10 +19,6 @@ class Cities extends Component {
 
   componentDidMount () {
     const { alert } = this.props
-    // console.log('componentDidMount')
-    // console.log('props info:', this.props)
-    // console.log('user info:', this.props.user)
-    // console.log('axios request has started')
     axios({
       url: `${apiUrl}/cities`,
       method: 'GET',
@@ -49,6 +45,35 @@ class Cities extends Component {
       })
     // console.log('axios request completed')
   }
+
+  // handleDelete = () => {
+  //   event.preventDefault()
+  //
+  //   const { alert } = this.props
+  //   // console.log('test 3')
+  //   axios({
+  //     url: `${apiUrl}/cities/${this.props.match.params.id}`,
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Authorization': `Bearer ${this.props.user.token}`
+  //     }
+  //   })
+  //   // sends user back to home after book has been deleted:
+  //     .then(this.props.history.push('/'))
+  //     .then(() => alert({
+  //       heading: 'You deleted a city',
+  //       message: messages.success,
+  //       variant: 'success'
+  //     }))
+  //     .catch(error => {
+  //       console.error(error)
+  //       alert({
+  //         heading: 'Error',
+  //         message: messages.failure,
+  //         variant: 'danger'
+  //       })
+  //     })
+  // }
 
   render () {
     // console.log('render started')
