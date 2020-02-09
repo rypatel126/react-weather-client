@@ -95,8 +95,11 @@ class City extends Component {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Spinner animation="grow" className="loading-spinner"/>
           </div>
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Link className="btn btn-dark" to={`/cities/${this.props.match.params.id}/edit`}>Searching for zip code, if this message persists for more than 5 seconds please double check you are using a valid 5-digit US zip code and click this message to edit the city information</Link>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button className="btn btn-danger" onClick={this.handleDelete}>Delete this city</button>
           </div>
         </Layout>
       )
